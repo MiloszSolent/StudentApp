@@ -1,6 +1,6 @@
 class Student(var id: String, var name: String, var course: String, var mark: Double) {
     override fun toString(): String {
-        return "name: $name, course: $course, mark: $mark)"
+        return "name: $name, course: $course, mark: $mark"
     }
 }
 
