@@ -1,4 +1,4 @@
-class Student(var id: String, var name: String, var course: String) {
+abstract class Student(var id: String, var name: String, var course: String) {
     var mark = 0.0
         set(newMark) {
             if (newMark in 0.0..100.0) {
@@ -10,7 +10,18 @@ class Student(var id: String, var name: String, var course: String) {
         return "name: $name, course: $course, mark: $mark"
     }
 
-    public fun getGrade(): String {
+    abstract fun getGrade(): String
+
+    public fun didPass(): Boolean {
+        if (mark >= 40.0) {
+            return true
+        }
+        return false
+    }
+}
+
+class undergraduate(id: String, name: String, course: String) : Student(id, name, course) {
+    public override fun getGrade(): String {
         val Grade = when (mark) {
             in 70.0..100.0 -> "First"
             in 60.0..69.0 -> "2/1"
@@ -21,33 +32,27 @@ class Student(var id: String, var name: String, var course: String) {
         }
         return Grade
     }
+}
 
-    public fun didPass(): Boolean {
-        if (mark >= 40.0) {
-            return true
+class masters(id: String, name: String, course: String) : Student(id, name, course) {
+    public override fun getGrade(): String {
+        val Grade = when (mark) {
+            in 70.0..100.0 -> "Distinction"
+            in 60.0..69.0 -> "Merit"
+            in 40.0..59.0 -> "Pass"
+            in 0.0..39.0-> "Fail"
+            else -> ""
         }
-        return false
+        return Grade
     }
 }
 
 fun main() {
-    var student_name = ""
+    val under = undergraduate("1234", "Dan", "Science")
+    under.mark = 69.0
 
-    while (student_name != "quit") {
-        println("Input student id:")
-        val student_id = readln()
+    val mast = masters("4321", "Mat", "English")
+    mast.mark = 69.0
 
-        println("Input student name:")
-        student_name = readln()
-
-        println("Input student course:")
-        val student_course = readln()
-
-        println("Input student mark:")
-        val student_mark = readln().toDouble()
-
-        val student = Student(student_id, student_name, student_course)
-        student.mark = student_mark
-        println(student)
-    }
+    println("undergraduate: $under with a grade of: ${under.getGrade()}, masters: $mast with a grade of: ${mast.getGrade()}")
 }
