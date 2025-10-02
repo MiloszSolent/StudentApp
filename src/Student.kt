@@ -14,7 +14,7 @@ class Student(var id: String, var name: String, var course: String, var mark: Do
         return "name: $name, course: $course, mark: $studentMark"
     }
 
-    fun getGrade(): String {
+    public fun getGrade(): String {
         val Grade = when (studentMark) {
             in 70.0..100.0 -> "First"
             in 60.0..69.0 -> "2/1"
@@ -24,6 +24,13 @@ class Student(var id: String, var name: String, var course: String, var mark: Do
             else -> ""
         }
         return Grade
+    }
+
+    public fun didPass(): Boolean {
+        if (studentMark >= 40.0) {
+            return true
+        }
+        return false
     }
 }
 
