@@ -1,6 +1,29 @@
 class Student(var id: String, var name: String, var course: String, var mark: Double) {
+    var studentMark = 0.0
+        set(newMark) {
+            if (newMark >= 0.0 && newMark <= 100.0) {
+                field = newMark
+            }
+        }
+
+    init {
+        studentMark = mark
+    }
+
     override fun toString(): String {
-        return "name: $name, course: $course, mark: $mark"
+        return "name: $name, course: $course, mark: $studentMark"
+    }
+
+    fun getGrade(): String {
+        val Grade = when (studentMark) {
+            in 70.0..100.0 -> "First"
+            in 60.0..69.0 -> "2/1"
+            in 50.0..59.0 -> "2/2"
+            in 40.0..49.0 -> "Third"
+            in 0.0..39.0-> "Fail"
+            else -> ""
+        }
+        return Grade
     }
 }
 
