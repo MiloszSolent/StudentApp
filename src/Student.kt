@@ -46,7 +46,8 @@ fun main() {
         println("Input student mark:")
         val student_mark = readln().toDouble()
 
-        var student = Student(student_id, student_name, student_course, student_mark)
+        val student = Student(student_id, student_name, student_course)
+        student.mark = student_mark
         println(student)
     }
 }
