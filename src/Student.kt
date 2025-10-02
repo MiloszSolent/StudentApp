@@ -1,21 +1,17 @@
-class Student(var id: String, var name: String, var course: String, var mark: Double) {
-    var studentMark = 0.0
+class Student(var id: String, var name: String, var course: String) {
+    var mark = 0.0
         set(newMark) {
-            if (newMark >= 0.0 && newMark <= 100.0) {
+            if (newMark in 0.0..100.0) {
                 field = newMark
             }
         }
 
-    init {
-        studentMark = mark
-    }
-
     override fun toString(): String {
-        return "name: $name, course: $course, mark: $studentMark"
+        return "name: $name, course: $course, mark: $mark"
     }
 
     public fun getGrade(): String {
-        val Grade = when (studentMark) {
+        val Grade = when (mark) {
             in 70.0..100.0 -> "First"
             in 60.0..69.0 -> "2/1"
             in 50.0..59.0 -> "2/2"
@@ -27,7 +23,7 @@ class Student(var id: String, var name: String, var course: String, var mark: Do
     }
 
     public fun didPass(): Boolean {
-        if (studentMark >= 40.0) {
+        if (mark >= 40.0) {
             return true
         }
         return false
